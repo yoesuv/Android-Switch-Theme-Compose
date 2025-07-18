@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Switch Theme Compose</string>
+    <string name="information">This application use Light/Dark theme</string>
+    <string name="app_dark_mode">Dark Mode</string>
 </resources>
