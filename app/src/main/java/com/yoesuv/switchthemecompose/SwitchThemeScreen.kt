@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -26,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yoesuv.switchthemecompose.ui.theme.SwitchThemeComposeTheme
+import com.yoesuv.switchthemecompose.ui.widget.ExitConfirmationDialog
 import com.yoesuv.switchthemecompose.utils.PreferencesHelper
 import com.yoesuv.switchthemecompose.utils.PreferencesHelper.Companion.PREF_KEY_DARK_THEME
 
@@ -38,6 +40,7 @@ fun SwitchThemeScreen(
     val context = LocalContext.current
     val prefHelper = remember { PreferencesHelper(context) }
     var isDarkTheme by remember { mutableStateOf(prefHelper.getBoolean(PREF_KEY_DARK_THEME)) }
+    var showExitDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -70,6 +73,17 @@ fun SwitchThemeScreen(
                     onThemeChanged(it)
                 })
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = { showExitDialog = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.exit))
+            }
+            ExitConfirmationDialog(
+                showDialog = showExitDialog,
+                onDismiss = { showExitDialog = false }
+            )
         }
     }
 }
