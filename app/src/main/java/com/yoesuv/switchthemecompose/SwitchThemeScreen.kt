@@ -21,16 +21,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yoesuv.switchthemecompose.ui.theme.SwitchThemeComposeTheme
+import com.yoesuv.switchthemecompose.utils.PreferencesHelper
+import com.yoesuv.switchthemecompose.utils.PreferencesHelper.Companion.PREF_KEY_DARK_THEME
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SwitchThemeScreen() {
 
-    var isDarkTheme by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val prefHelper = remember { PreferencesHelper(context) }
+    var isDarkTheme by remember { mutableStateOf(prefHelper.getBoolean(PREF_KEY_DARK_THEME)) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -60,6 +65,7 @@ fun SwitchThemeScreen() {
                 Text(stringResource(R.string.app_dark_mode))
                 Switch(checked = isDarkTheme, onCheckedChange = {
                     isDarkTheme = it
+                    prefHelper.setBoolean(PREF_KEY_DARK_THEME, it)
                 })
             }
         }
