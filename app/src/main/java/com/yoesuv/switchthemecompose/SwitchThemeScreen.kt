@@ -31,7 +31,9 @@ import com.yoesuv.switchthemecompose.utils.PreferencesHelper.Companion.PREF_KEY_
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SwitchThemeScreen() {
+fun SwitchThemeScreen(
+    onThemeChanged: (Boolean) -> Unit = {}
+) {
 
     val context = LocalContext.current
     val prefHelper = remember { PreferencesHelper(context) }
@@ -65,7 +67,7 @@ fun SwitchThemeScreen() {
                 Text(stringResource(R.string.app_dark_mode))
                 Switch(checked = isDarkTheme, onCheckedChange = {
                     isDarkTheme = it
-                    prefHelper.setBoolean(PREF_KEY_DARK_THEME, it)
+                    onThemeChanged(it)
                 })
             }
         }
