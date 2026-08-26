@@ -23,21 +23,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yoesuv.switchthemecompose.ui.theme.SwitchThemeComposeTheme
 import com.yoesuv.switchthemecompose.ui.widget.ExitConfirmationDialog
-import com.yoesuv.switchthemecompose.utils.PreferencesHelper
-import com.yoesuv.switchthemecompose.utils.PreferencesHelper.Companion.PREF_KEY_DARK_THEME
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
-    val context = LocalContext.current
-    val prefHelper = remember { PreferencesHelper(context) }
-    var isDarkTheme by remember { mutableStateOf(prefHelper.getBoolean(PREF_KEY_DARK_THEME)) }
+fun SwitchThemeScreen(
+    isDarkTheme: Boolean,
+    onThemeChanged: (Boolean) -> Unit,
+) {
     var showExitDialog by remember { mutableStateOf(false) }
     val activity = LocalActivity.current
 
@@ -68,10 +65,10 @@ fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(stringResource(R.string.app_dark_mode))
-                Switch(checked = isDarkTheme, onCheckedChange = {
-                    isDarkTheme = it
-                    onThemeChanged(it)
-                })
+                Switch(
+                    checked = isDarkTheme,
+                    onCheckedChange = onThemeChanged,
+                )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
@@ -93,6 +90,9 @@ fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
 @Composable
 fun SwitchThemeScreenPreview() {
     SwitchThemeComposeTheme {
-        SwitchThemeScreen()
+        SwitchThemeScreen(
+            isDarkTheme = false,
+            onThemeChanged = {},
+        )
     }
 }
