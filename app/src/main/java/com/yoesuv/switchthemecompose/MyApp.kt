@@ -4,7 +4,6 @@ import android.app.Application
 import com.yoesuv.switchthemecompose.utils.PreferencesHelper
 
 class MyApp : Application() {
-
     companion object {
         var prefHelper: PreferencesHelper? = null
     }
@@ -13,5 +12,4 @@ class MyApp : Application() {
         super.onCreate()
         prefHelper = PreferencesHelper(this)
     }
-
 }

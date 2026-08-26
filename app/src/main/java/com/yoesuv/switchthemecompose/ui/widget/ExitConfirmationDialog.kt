@@ -11,7 +11,7 @@ import kotlin.system.exitProcess
 @Composable
 fun ExitConfirmationDialog(
     showDialog: Boolean,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     if (showDialog) {
         AlertDialog(
@@ -23,18 +23,18 @@ fun ExitConfirmationDialog(
                     onClick = {
                         onDismiss()
                         exitProcess(0)
-                    }
+                    },
                 ) {
                     Text(stringResource(R.string.yes))
                 }
             },
             dismissButton = {
                 TextButton(
-                    onClick = onDismiss
+                    onClick = onDismiss,
                 ) {
                     Text(stringResource(R.string.no))
                 }
-            }
+            },
         )
     }
 }

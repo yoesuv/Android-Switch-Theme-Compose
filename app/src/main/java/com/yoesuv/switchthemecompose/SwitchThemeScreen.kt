@@ -33,10 +33,7 @@ import com.yoesuv.switchthemecompose.utils.PreferencesHelper.Companion.PREF_KEY_
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SwitchThemeScreen(
-    onThemeChanged: (Boolean) -> Unit = {}
-) {
-
+fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
     val context = LocalContext.current
     val prefHelper = remember { PreferencesHelper(context) }
     var isDarkTheme by remember { mutableStateOf(prefHelper.getBoolean(PREF_KEY_DARK_THEME)) }
@@ -48,14 +45,15 @@ fun SwitchThemeScreen(
             TopAppBar(
                 title = {
                     Text(text = stringResource(R.string.app_name))
-                }
+                },
             )
-        }
+        },
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 24.dp)
+            modifier =
+                Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 24.dp),
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(stringResource(R.string.information))
@@ -65,7 +63,7 @@ fun SwitchThemeScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(stringResource(R.string.app_dark_mode))
                 Switch(checked = isDarkTheme, onCheckedChange = {
@@ -76,13 +74,13 @@ fun SwitchThemeScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { showExitDialog = true },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(stringResource(R.string.exit))
             }
             ExitConfirmationDialog(
                 showDialog = showExitDialog,
-                onDismiss = { showExitDialog = false }
+                onDismiss = { showExitDialog = false },
             )
         }
     }
