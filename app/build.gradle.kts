@@ -1,27 +1,35 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    base
+}
+val appApplicationId = "com.yoesuv.switchthemecompose"
+val appVersionName = "1.0.1"
+
+base {
+    archivesName = "$appApplicationId-v$appVersionName"
 }
 
 android {
-    namespace = "com.yoesuv.switchthemecompose"
+    namespace = appApplicationId
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.yoesuv.switchthemecompose"
+        applicationId = appApplicationId
         minSdk = 24
         targetSdk = 37
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = appVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

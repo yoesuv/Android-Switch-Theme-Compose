@@ -1,21 +1,20 @@
-# Add project specific ProGuard rules here.
+# Add project specific R8 rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 #
 # For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+#   https://d.android.com/studio/build/shrink-code
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
+# Simple Compose project: no custom keep rules required.
+# AndroidX Compose, Material3, Activity and Core KTX ship with
+# consumer keep rules that R8 applies automatically.
+# Add rules below only if you use reflection, serialization, JNI or WebView JS.
+
+# Example: keep WebView JS interface
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep line numbers for crash stack traces (uncomment to enable)
+# -keepattributes SourceFile,LineNumberTable
+# -renamesourcefileattribute SourceFile
