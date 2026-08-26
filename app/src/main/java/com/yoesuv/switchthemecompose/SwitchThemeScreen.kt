@@ -1,5 +1,6 @@
 package com.yoesuv.switchthemecompose
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +39,7 @@ fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
     val prefHelper = remember { PreferencesHelper(context) }
     var isDarkTheme by remember { mutableStateOf(prefHelper.getBoolean(PREF_KEY_DARK_THEME)) }
     var showExitDialog by remember { mutableStateOf(false) }
+    val activity = LocalActivity.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -81,6 +83,7 @@ fun SwitchThemeScreen(onThemeChanged: (Boolean) -> Unit = {}) {
             ExitConfirmationDialog(
                 showDialog = showExitDialog,
                 onDismiss = { showExitDialog = false },
+                onExit = { activity?.finishAffinity() },
             )
         }
     }
