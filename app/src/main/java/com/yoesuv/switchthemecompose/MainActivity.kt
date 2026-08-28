@@ -27,10 +27,11 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = false,
             ) {
                 SwitchThemeScreen(
+                    isDarkTheme = isDarkTheme,
                     onThemeChanged = { newTheme ->
                         isDarkTheme = newTheme
                         prefHelper.setBoolean(PREF_KEY_DARK_THEME, newTheme)
-                    }
+                    },
                 )
             }
         }

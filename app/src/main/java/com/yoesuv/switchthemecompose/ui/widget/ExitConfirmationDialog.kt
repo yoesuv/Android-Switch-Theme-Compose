@@ -6,12 +6,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.yoesuv.switchthemecompose.R
-import kotlin.system.exitProcess
 
 @Composable
 fun ExitConfirmationDialog(
     showDialog: Boolean,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onExit: () -> Unit,
 ) {
     if (showDialog) {
         AlertDialog(
@@ -22,19 +22,19 @@ fun ExitConfirmationDialog(
                 TextButton(
                     onClick = {
                         onDismiss()
-                        exitProcess(0)
-                    }
+                        onExit()
+                    },
                 ) {
                     Text(stringResource(R.string.yes))
                 }
             },
             dismissButton = {
                 TextButton(
-                    onClick = onDismiss
+                    onClick = onDismiss,
                 ) {
                     Text(stringResource(R.string.no))
                 }
-            }
+            },
         )
     }
 }
